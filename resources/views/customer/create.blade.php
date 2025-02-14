@@ -2,8 +2,14 @@
 
 @section('content')
 <div class="row justify-content-center mt-5">
+    
     <div class="col-md-8">
         <h3>Customers</h3>
+        @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <p class="alert alert-danger">{{ $error }}</p>
+        @endforeach
+        @endif
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -15,49 +21,58 @@
 
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <div class="form-group">
-                            <label for="">Image</label>
-                            <input type="file" class="form-control">
+                <form action="{{ route('customers.store') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                                <label for="">Image</label>
+                                <input name="file" type="file" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label for="">First Name</label>
-                            <input type="text" class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="">First Name</label>
+                                <input name="first_name" type="text" class="form-control" value="{{ old('first_name') }}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label for="">Last Name</label>
-                            <input type="text" class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="">Last Name</label>
+                                <input name="last_name" type="text" class="form-control" value="{{ old('last_name') }}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label for="">Email</label>
-                            <input type="email" class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input name="email" type="email" class="form-control" value="{{ old('email') }}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label for="">Phone</label>
-                            <input type="text" class="form-control">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="">Phone</label>
+                                <input name="phone" type="text" class="form-control" value="{{ old('phone') }}">
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-12 mb-3">
-                        <div class="form-group">
-                            <label for="">Bank Account Number</label>
-                            <input type="text" class="form-control">
+    
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                                <label for="">Bank Account Number</label>
+                                <input name="bank_account_number" type="text" class="form-control" value="{{ old('bank_account_number') }}">
+                            </div>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                                <label for="">About</label>
+                                <textarea name="about" class="form-control">{{ old('about') }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <button type="submit" class="btn btn-dark"><i class="fas fa-save"></i> Create</button>
+                        </div>
+    
                     </div>
-                    <div class="col-md-12 mb-3">
-                        <button type="submit" class="btn btn-dark"><i class="fas fa-save"></i> Create</button>
-                    </div>
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
