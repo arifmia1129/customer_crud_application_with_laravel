@@ -16,7 +16,7 @@ class CustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file'=> ['nullable'],
+            'image'=> ['nullable', 'image', 'max:3000'],
             'first_name'=> ['string', 'required', 'max:255'],
             'last_name'=> ['string', 'required','max:255'],
             'email'=> ['string', 'required','email'],
