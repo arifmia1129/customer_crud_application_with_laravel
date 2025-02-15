@@ -21,7 +21,7 @@ class CustomerRequest extends FormRequest
             'last_name'=> ['string', 'required','max:255'],
             'email'=> ['string', 'required','email'],
             'phone'=> ['string', 'required'],
-            'bank_account_number'=> ['string', 'required'],
+            'bank_account_number'=> ['numeric', 'required'],
             'about'=> ['string', 'max:255'],
         ];
     }
