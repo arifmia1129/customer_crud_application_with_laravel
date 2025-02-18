@@ -13,7 +13,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view("customer.index");
+        $customers = Customer::all();
+
+        return view("customer.index", compact('customers'));
     }
 
     /**
@@ -45,11 +47,7 @@ class CustomerController extends Controller
         $customer->about = $request->about;
         $customer->save();
 
-        return response()->json([
-            'success' => true,
-            'message'=> 'Successfully created customer',
-            'data'=> $customer
-        ]);
+        return redirect()->route('customers.index');
     }
 
     /**
