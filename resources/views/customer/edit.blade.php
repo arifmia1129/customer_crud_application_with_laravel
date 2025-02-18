@@ -21,9 +21,11 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('customers.create') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('customers.update', $customer->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="row">
+                        <img style="width:100px" src="{{ asset($customer->image) }}" alt="{{ $customer->first_name }}">
                         <div class="col-md-12 mb-3">
                             <div class="form-group">
                                 <label for="">Image</label>
@@ -39,7 +41,7 @@
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
                                 <label for="">Last Name</label>
-                                <input name="last_name" type="text" class="form-control" value="{{ old($customer->last_name) }}">
+                                <input name="last_name" type="text" class="form-control" value="{{ $customer->last_name }}">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
