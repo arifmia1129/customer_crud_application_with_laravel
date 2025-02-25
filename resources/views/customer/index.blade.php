@@ -55,7 +55,12 @@
                         <td>
                             <a href="{{ route('customers.edit', $customer->id) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i class="far fa-edit"></i></a>
                             <a href="{{ route('customers.show', $customer->id) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i class="far fa-eye"></i></a>
-                            <a href="" style="color: #2c2c2c;" class="ms-1 me-1"><i class="fas fa-trash-alt"></i></a>
+                            <a href="javascript:;" onclick="if(confirm('Are you want to delete this customer?')) $('.form-{{ $customer->id }}').submit()" style="color: #2c2c2c;" class="ms-1 me-1"><i class="fas fa-trash-alt"></i></a>
+
+                            <form class="form-{{ $customer->id }}" action="{{ route('customers.destroy',$customer->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                         </td>
                       </tr>
                       @endforeach
