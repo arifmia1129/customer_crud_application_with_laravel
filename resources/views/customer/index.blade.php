@@ -22,12 +22,14 @@
                 </div>
                 <div class="col-md-2">
 
+                   <form action="{{ route('customers.index') }}" method="get" class="order-by">
                     <div class="input-group mb-3">
-                        <select class="form-select" name="" id="">
-                            <option value="">Newest to Old</option>
-                            <option value="">Old to Newest</option>
+                        <select class="form-select" name="orderBy" id="order-by" onchange="$('.order-by').submit()">
+                            <option @selected(request()->orderBy  === 'desc') value="desc">Newest to Oldest</option>
+                            <option @selected(request()->orderBy === 'asc') value="asc">Oldest to Newest</option>
                         </select>
                     </div>
+                   </form>
                 </div>
                 </div>
                   
