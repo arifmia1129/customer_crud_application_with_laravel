@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use File;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
+        $customers = Customer::when($request->has('searchBy'), function ($customer) use ($request) {
+            return $customer->where('first_name', 'LIKE', "%$request->searchBy%")
+            ->orWhere('last_name', 'LIKE', "%$request->searchBy%")->orWhere('email', 'LIKE', "%$request->searchBy%")->orWhere('phone', 'LIKE', "%$request->searchBy%")
+            ;
+        })->get(); 
 
         return view("customer.index", compact('customers'));
     }
