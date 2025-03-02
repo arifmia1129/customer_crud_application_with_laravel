@@ -22,6 +22,17 @@ class CustomerController extends Controller
 
         return view("customer.index", compact('customers'));
     }
+    public function trashIndex(Request $request)
+
+    {
+        $customers = Customer::when($request->has('searchBy'), function ($customer) use ($request) {
+            return $customer->where('first_name', 'LIKE', "%$request->searchBy%")
+            ->orWhere('last_name', 'LIKE', "%$request->searchBy%")->orWhere('email', 'LIKE', "%$request->searchBy%")->orWhere('phone', 'LIKE', "%$request->searchBy%")
+            ;
+        })->orderBy('id',$request->has('orderBy') && $request->orderBy === 'asc' ? 'ASC' : 'DESC')->get(); 
+
+        return view("customer.trash", compact('customers'));
+    }
 
     /**
      * Show the form for creating a new resource.
